@@ -1,8 +1,9 @@
 AS=scas
 ASFLAGS=-fexplicit-export -fexplicit-import
 
-STARTUP_SOURCES=$(addprefix startup/,first_run.asm)
-SOURCES=$(addprefix src/,$(STARTUP_SOURCES))
+STARTUP_SOURCES=$(addprefix startup/,first_run.asm rise.asm)
+IO_SOURCES=$(addprefix io/,output.asm)
+SOURCES=$(addprefix src/,$(STARTUP_SOURCES) $(IO_SOURCES))
 OBJECTS=$(addprefix bin/,$(addsuffix .o,$(SOURCES)))
 
 bin/src/%.asm.o:src/%.asm headers
@@ -11,15 +12,14 @@ bin/src/%.asm.o:src/%.asm headers
 .PHONY: .default all $(ROM)
 .default: $(ROM)
 
+LINKER=bin/src/linker.asm.o
 ROM=bin/rise.bin
 
-MAIN=bin/src/startup/rise.asm.o
-
-$(ROM): $(MAIN) $(OBJECTS)
-	scas $^ -o $@
+$(ROM): $(LINKER) $(OBJECTS)
+	scas $^ -o $@ $(ASFLAGS)
 
 clean:
-	$(RM) $(ROM) $(OBJECTS) $(MAIN)
+	$(RM) $(ROM) $(OBJECTS) $(LINKER)
 
 run:
 	zenith80 --file $(ROM)
