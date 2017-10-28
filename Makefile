@@ -1,13 +1,21 @@
 AS=scas
-ASFLAGS=-fexplicit-export -fexplicit-import
+CC=kcc
+ASFLAGS=-fexplicit-export -fexplicit-import -Iheaders
+CFLAGS=--nostdinc --nostdlib -Iheaders --no-std-crt0 
 
-STARTUP_SOURCES=$(addprefix startup/,first_run.asm rise.asm)
-IO_SOURCES=$(addprefix io/,output.asm)
-SOURCES=$(addprefix src/,$(STARTUP_SOURCES) $(IO_SOURCES))
+STARTUP_SOURCES=$(addprefix startup/,rise.c)
+IO_SOURCES=$(addprefix io/,output.c)
+MAIN_SOURCES=system.c screens.c data.c
+SCREEN_SOURCES=$(addprefix screens/,main_menu.c)
+SOURCES=$(addprefix src/,$(STARTUP_SOURCES) $(IO_SOURCES) $(MAIN_SOURCES) $(SCREEN_SOURCES))
 OBJECTS=$(addprefix bin/,$(addsuffix .o,$(SOURCES)))
 
 bin/src/%.asm.o:src/%.asm headers
-	scas -c $< -o $@ -Iheaders $(ASFLAGS)
+	$(AS) -c $< -o $@ $(ASFLAGS)
+	
+bin/src/%.c.o:src/%.c headers
+	$(CC) -mz80 -S $< -o bin/$<.asm $(CFLAGS)
+	$(AS) -c bin/$<.asm -o $@ $(ASFLAGS)
 
 .PHONY: .default all $(ROM)
 .default: $(ROM)
@@ -20,6 +28,7 @@ $(ROM): $(LINKER) $(OBJECTS)
 
 clean:
 	$(RM) $(ROM) $(OBJECTS) $(LINKER)
+	find bin/ -mindepth 2 -type f -delete
 
 run:
 	zenith80 --file $(ROM)
