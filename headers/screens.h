@@ -1,9 +1,8 @@
-#ifndef SCREENS_H
-#define SCREENS_H
+#pragma once
 
 typedef void (*screen)();
 screen getCurrentScreen();
+void setScreen(screen s);
 
 void main_menu();
-
-#endif
+void new_game();

@@ -13,7 +13,8 @@ void _sdcc_call_hl() __naked{
 void main() {
 	if((getData()->save_flags&0x04)!=0x04){
 		initData();
-	}	
+	}
+	setScreen(main_menu);
 	while (1) {
 		getCurrentScreen()();
 	}

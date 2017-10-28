@@ -4,9 +4,9 @@ ASFLAGS=-fexplicit-export -fexplicit-import -Iheaders
 CFLAGS=--nostdinc --nostdlib -Iheaders --no-std-crt0 
 
 STARTUP_SOURCES=$(addprefix startup/,rise.c)
-IO_SOURCES=$(addprefix io/,output.c)
+IO_SOURCES=$(addprefix io/,output.c input.c)
 MAIN_SOURCES=system.c screens.c data.c
-SCREEN_SOURCES=$(addprefix screens/,main_menu.c)
+SCREEN_SOURCES=$(addprefix screens/,main_menu.c new_game.c)
 SOURCES=$(addprefix src/,$(STARTUP_SOURCES) $(IO_SOURCES) $(MAIN_SOURCES) $(SCREEN_SOURCES))
 OBJECTS=$(addprefix bin/,$(addsuffix .o,$(SOURCES)))
 
@@ -30,7 +30,7 @@ clean:
 	$(RM) $(ROM) $(OBJECTS) $(LINKER)
 	find bin/ -mindepth 2 -type f -delete
 
-run:
+run: $(ROM)
 	zenith80 --file $(ROM)
 
 debug:

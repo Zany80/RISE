@@ -6,3 +6,7 @@
 screen getCurrentScreen() {
 	return getData()->current_screen;
 }
+
+void setScreen(screen s){
+	getData()->current_screen=s;
+}
