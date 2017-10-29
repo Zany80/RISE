@@ -1,7 +1,7 @@
 #include <screens.h>
 #include <output.h>
-#include <system.h>
 #include <input.h>
+#include <data.h>
 
 #define menu_string (const char *) \
 						"RISE\n" \
@@ -17,14 +17,23 @@
 						"\n"
 
 void main_menu(){
-	cls();
-	puts(menu_string);
-	{
-		switch(waitInput()){
+	int invalid=8;
+	while (1) {		
+		keycode_t keycode;
+		if(invalid==8){
+			cls();
+			puts(menu_string);
+			invalid=0;
+		}
+		switch(keycode=waitInput()){
 			case keyn:
-				setScreen(new_game);
-				break;
+				newGame();
+				return;
 			default:
+				invalid++;
+				puts("Invalid key: ");
+				puts(toAscii(keycode));
+				putch(0x0A);
 				break;
 		}
 	}

@@ -1,8 +1,8 @@
 #pragma once
 
-typedef void (*screen)();
-screen getCurrentScreen();
-void setScreen(screen s);
+typedef void (*screen_t)();
+screen_t getCurrentScreen();
+void setScreen(screen_t s);
 
 void main_menu();
-void new_game();
+void select_file();

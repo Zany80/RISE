@@ -8,5 +8,9 @@ enum keycode_t{
 	keyEXCLAMATION=65,keyAT,keyPOUND,keyDOLLAR
 };
 
-enum keycode_t pollInput();
-enum keycode_t waitInput();
+typedef enum keycode_t keycode_t;
+
+keycode_t pollInput();
+keycode_t waitInput();
+
+char *toAscii(keycode_t keycode);

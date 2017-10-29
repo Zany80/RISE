@@ -3,10 +3,10 @@
 #include <system.h>
 #include <output.h>
 
-screen getCurrentScreen() {
-	return getData()->current_screen;
+screen_t getCurrentScreen() {
+	return getData()->current_save.current_screen;
 }
 
-void setScreen(screen s){
-	getData()->current_screen=s;
+void setScreen(screen_t s){
+	getData()->current_save.current_screen=s;
 }

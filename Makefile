@@ -1,12 +1,12 @@
 AS=scas
 CC=kcc
 ASFLAGS=-fexplicit-export -fexplicit-import -Iheaders
-CFLAGS=--nostdinc --nostdlib -Iheaders --no-std-crt0 
+CFLAGS=--nostdinc --nostdlib -Iheaders --no-std-crt0 --std-sdcc99
 
 STARTUP_SOURCES=$(addprefix startup/,rise.c)
 IO_SOURCES=$(addprefix io/,output.c input.c)
 MAIN_SOURCES=system.c screens.c data.c
-SCREEN_SOURCES=$(addprefix screens/,main_menu.c new_game.c)
+SCREEN_SOURCES=$(addprefix screens/,main_menu.c)
 SOURCES=$(addprefix src/,$(STARTUP_SOURCES) $(IO_SOURCES) $(MAIN_SOURCES) $(SCREEN_SOURCES))
 OBJECTS=$(addprefix bin/,$(addsuffix .o,$(SOURCES)))
 

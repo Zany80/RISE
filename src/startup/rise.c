@@ -11,10 +11,11 @@ void _sdcc_call_hl() __naked{
 }
 
 void main() {
-	if((getData()->save_flags&0x04)!=0x04){
+	__asm__("ld sp, 0xF000");
+	if ( ( (getData()->save_flags) & 0x01 ) != 0x01){
 		initData();
 	}
-	setScreen(main_menu);
+	main_menu();
 	while (1) {
 		getCurrentScreen()();
 	}

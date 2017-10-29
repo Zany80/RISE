@@ -1,4 +1,4 @@
-.area rise
-.area _CODE
+;//.area rise
+;//.area _CODE
 
 call _main
