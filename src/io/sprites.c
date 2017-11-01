@@ -53,12 +53,8 @@ void drawSprite16_16(short start_index,short x,short y){
 void drawSprite32_32(short start_index,short x,short y){
 	drawSprite16_16(start_index,x,y);
 	drawSprite16_16(start_index+4,x+16,y);
-	drawSprite(start_index+2,x+16,y);
-	drawSprite(start_index+3,x+24,y);
-	drawSprite(start_index+4,x,y+8);
-	drawSprite(start_index+5,x+8,y+8);
-	drawSprite(start_index+6,x+16,y+8);
-	drawSprite(start_index+7,x+24,y+8);
+	drawSprite16_16(start_index+8,x,y+16);
+	drawSprite16_16(start_index+12,x+16,y+16);
 }
 
 void drawSprite16_8(short start_index,short x,short y){
