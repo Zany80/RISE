@@ -4,7 +4,7 @@ ASFLAGS=-fexplicit-export -fexplicit-import -Iheaders
 CFLAGS=--nostdinc --nostdlib -Iheaders --no-std-crt0 --std-sdcc99
 
 STARTUP_SOURCES=$(addprefix startup/,rise.c)
-IO_SOURCES=$(addprefix io/,output.c input.c)
+IO_SOURCES=$(addprefix io/,output.c input.c sprites.c)
 MAIN_SOURCES=system.c screens.c data.c
 SCREEN_SOURCES=$(addprefix screens/,main_menu.c)
 SOURCES=$(addprefix src/,$(STARTUP_SOURCES) $(IO_SOURCES) $(MAIN_SOURCES) $(SCREEN_SOURCES))
@@ -22,17 +22,21 @@ bin/src/%.c.o:src/%.c headers
 
 LINKER=bin/src/linker.asm.o
 ROM=bin/rise.bin
+IMAGE=bin/rise.png
 
 $(ROM): $(LINKER) $(OBJECTS)
 	scas $^ -o $@ $(ASFLAGS)
 
+$(IMAGE): $(ROM)
+	cat src/icon.png $(ROM) > $(IMAGE)
+
 clean:
-	$(RM) $(ROM) $(OBJECTS) $(LINKER)
+	$(RM) $(ROM) $(OBJECTS) $(LINKER) $(IMAGE)
 	find bin/ -mindepth 2 -type f -delete
 
-run: $(ROM)
-	zenith80 --file $(ROM)
+run: $(IMAGE)
+	zenith80 --file $(IMAGE) --format=png
 
-debug:
-	zenith80-superdebug --file $(ROM) 2>o
+debug: $(IMAGE)
+	zenith80-superdebug --file $(IMAGE) --format=png 2>o
 	geany o

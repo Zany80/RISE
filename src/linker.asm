@@ -1,4 +1,10 @@
-;//.area rise
-;//.area _CODE
+.area _CODE
 
-call _main
+.db "ZENITH"
+.dw title
+.dw _main
+
+title: .asciiz "RISE"
+
+.area _DATA
+.area SPRITESMAN

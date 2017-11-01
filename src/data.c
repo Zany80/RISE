@@ -3,6 +3,7 @@
 #include <input.h>
 #include <system.h>
 #include <screens.h>
+#include <sprites.h>
 
 data_t * getData(){
 	return (data_t*)0xF000;
