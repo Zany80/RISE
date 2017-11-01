@@ -21,17 +21,21 @@
 extern char * ICON_DATA;
 
 void main_menu(){
+	static int uploaded=0;
 	int invalid=8;
 	char * icon=ICON_DATA;
-	uploadSprite32_32(1,icon,15);
+	if(uploaded==0){
+		uploaded=1;
+		uploadSprite32_32(1,icon,1);
+	}
 	while (1) {
 		keycode_t keycode;
 		if(invalid==8){
 			cls();
 			puts(menu_string);
-			drawSprite32_32(1,200,30);
 			invalid=0;
-		}
+		}	
+		drawSprite32_32(1,200,30);
 		switch(keycode=waitInput()){
 			case keyn:
 				newGame();
