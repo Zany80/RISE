@@ -9,43 +9,111 @@ data_t * getData(){
 	return (data_t*)0xF000;
 }
 
-void newGame(){
-	data_t *data = getData();
-	setScreen(select_file);
-}
-
-void select_file(){
+void fileInfo(){
+	data_t *data=getData();
+	char i;
 	cls();
-	{
-		data_t *data = getData();
-		unsigned char save_file=0;
-		puts("Select file: \n\nFile 1: ");
-		puts(((data->save_flags&0x02)==0x02)?"Used":"Free");
-		puts("\nFile 2: ");
-		puts(((data->save_flags&0x04)==0x04)?"Used":"Free");
-		puts("\nFile 3: ");
-		puts(((data->save_flags&0x08)==0x08)?"Used":"Free");
-		puts("\n\n(Press 1-3 on the keyboard)\n\n");
-		while (save_file == 0){
-			keycode_t keycode = waitInput();
-			switch (keycode){
-				case key1:
-					save_file=1;
-					break;
-				case key2:
-					save_file=2;
-					break;
-				case key3:
-					save_file=3;
-					break;
-				default:
-					break;
-			}
+	puts("Select a file: \n\n");
+	for(i=1;i<4;i++){
+		puts("File ");
+		putch(i+'0');
+		puts(": ");
+		if((data->save_flags&1<<i)==1<<i){
+			puts(data->save_files[i-1].title);
+			puts("\n\t");
+			puts(data->save_files[i-1].subtitle);
+			putch('\n');
 		}
-		{
-			while(1);
+		else{
+			puts("Free\n");
 		}
 	}
+	puts("\n'm' - back to Main Menu\n");
+}
+
+void newGame(){
+	char i=0;
+	data_t *data=getData();
+	fileInfo();
+	while(i==0){
+		switch(i=waitInput()){
+			case key1:
+			case key2:
+			case key3:
+				break;
+			case keym:
+				setScreen(main_menu);
+				return;
+			default:
+				i=0;
+				break;
+		}
+	}
+	if (data->save_flags&(1<<i)){
+		puts("File already in use!\n\nRight click to continue...");
+		halt();
+		return;
+	}
+	else{
+		initFile(&data->current_save);
+		save(&data->save_files[i-1]);
+		data->save_flags |= (1<<i);
+	}
+}
+
+void load(save_file_t *s);
+
+void loadGame(){
+	char i;
+	data_t *data=getData();
+	fileInfo();
+	i=0;
+	while(i==0){
+		switch(i=waitInput()){
+			case key1:
+			case key2:
+			case key3:
+				break;
+			case keym:
+				setScreen(main_menu);
+				return;
+			default:
+				i=0;
+				break;
+		}
+	}
+	if (data->save_flags&(1<<i)){
+		puts("Loading file ");
+		putch(i+'0');
+		puts("...\n\n");
+		load(&data->save_files[i-1]);
+	}
+	else{
+		initFile(&data->current_save);
+		save(&data->save_files[i-1]);
+		data->save_flags |= (1<<i);
+	}
+}
+
+void save(save_file_t *file){
+	save_file_t *current=&getData()->current_save;
+	file->current_screen=current->current_screen;
+	strcpy(file->title,current->title);
+	strcpy(file->subtitle,current->subtitle);
+}
+
+void load(save_file_t *file){
+	save_file_t *current=&getData()->current_save;
+	current->current_screen=file->current_screen;
+}
+
+void initFile(save_file_t *file){
+	data_t *data=getData();
+	strcpy(file->title,"Introduction");
+	strcpy(data->current_save.title,"Introduction");
+	strcpy(data->current_save.subtitle,"Welcome to RISE!");
+	data->current_save.current_screen=intro_screen;
+	save(file);
 }
 
 void initData(){

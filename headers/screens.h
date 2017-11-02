@@ -6,3 +6,4 @@ void setScreen(screen_t s);
 
 void main_menu();
 void select_file();
+void intro_screen();

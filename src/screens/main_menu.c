@@ -10,6 +10,7 @@
 						"\n" \
 						"Created by Noam Preil.\n" \
 						"Copyright 2017 Noam Preil.\n" \
+						"Art created by and copyright of Thomas Fenton.\n" \
 						"\n" \
 						"Select option: \n" \
 						"\t'n' - New Game\n" \
@@ -21,8 +22,8 @@
 extern char * ICON_DATA;
 
 void main_menu(){
-	static int uploaded=0;
-	int invalid=8;
+	static char uploaded=0;
+	char invalid=8;
 	char * icon=ICON_DATA;
 	if(uploaded==0){
 		uploaded=1;
@@ -38,7 +39,10 @@ void main_menu(){
 		drawSprite32_32(1,200,30);
 		switch(keycode=waitInput()){
 			case keyn:
-				newGame();
+				setScreen(newGame);
+				return;
+			case keyl:
+				setScreen(loadGame);
 				return;
 			default:
 				invalid++;

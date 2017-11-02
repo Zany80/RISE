@@ -31,6 +31,16 @@ void strcpy(char * dest, const char * src){
 		src++;
 	}
 }
+
+void memcpy(char * dest, const char * src,int length){
+	int i=0;
+	for(;i<length;i++){
+		*dest = *src;
+		dest++;
+		src++;
+	}
+}
+
 void putch(char c);
 int strlen(const char *s){
 	int i = 0;
@@ -45,4 +55,18 @@ int strlen(const char *s){
 		}
 	}
 	return i;
+}
+
+short swapBanks(char bank,char index) __naked{
+	__asm
+	pop af
+	pop de
+	push de
+	push af
+	push af
+	ld a, 3
+	out (2), a
+	ret
+	__endasm;
+	bank;index;
 }
