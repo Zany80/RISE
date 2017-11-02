@@ -1,3 +1,5 @@
+#import _main
+
 .area _CODE
 
 .db "ZENITH"
