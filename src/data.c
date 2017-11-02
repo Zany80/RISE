@@ -50,9 +50,16 @@ void newGame(){
 		}
 	}
 	if (data->save_flags&(1<<i)){
-		puts("File already in use!\n\nRight click to continue...");
-		halt();
-		return;
+		puts("File already in use!\n\nClear? (y/n)");
+		while(1){
+			switch(waitInput()){
+				case keyn:
+					return;
+				case keyy:
+					initFile(&data->save_files[i-1]);
+					return;
+			}
+		}
 	}
 	else{
 		initFile(&data->current_save);
@@ -109,9 +116,8 @@ void load(save_file_t *file){
 
 void initFile(save_file_t *file){
 	data_t *data=getData();
-	strcpy(file->title,"Introduction");
 	strcpy(data->current_save.title,"Introduction");
-	strcpy(data->current_save.subtitle,"Welcome to RISE!");
+	strcpy(data->current_save.subtitle,"The Dark Prince");
 	data->current_save.current_screen=intro_screen;
 	save(file);
 }
@@ -120,4 +126,12 @@ void initData(){
 	data_t *data=getData();
 	data->save_flags |= 0x01;
 	data->last_save_file=0;
+}
+
+void setTitle(const char *title){
+	strcpy(getData()->current_save.title,title);
+}
+
+void setSubtitle(const char *subtitle){
+	strcpy(getData()->current_save.subtitle,subtitle);
 }

@@ -24,3 +24,6 @@ void loadGame();
 
 void initFile(save_file_t *save_file);
 void save(save_file_t *save_file);
+
+void setTitle(const char *title);
+void setSubtitle(const char *subtitle);
