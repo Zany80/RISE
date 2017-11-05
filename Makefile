@@ -15,7 +15,7 @@ bin/src/%.asm.o:src/%.asm headers
 	$(AS) -c $< -o $@ $(ASFLAGS)
 	
 bin/src/%.c.o:src/%.c headers
-	mkdir $(dir bin/src/%.asm.o) -p
+	mkdir $(dir bin/$<.asm) -p
 	$(CC) -S $< -o bin/$<.asm $(CFLAGS)
 	$(AS) -c bin/$<.asm -o $@ $(ASFLAGS)
 
