@@ -110,8 +110,7 @@ void save(save_file_t *file){
 }
 
 void load(save_file_t *file){
-	save_file_t *current=&getData()->current_save;
-	current->current_screen=file->current_screen;
+	getData()->current_save.current_screen=file->current_screen;
 }
 
 void initFile(save_file_t *file){
