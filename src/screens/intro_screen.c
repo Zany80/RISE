@@ -18,18 +18,19 @@
  "fighting, character classes, levelling up - but the characters " \
  "are premade, and each one has their own \"feel\".\n" \
  "\n" \
- "Good luck.\n\n'b' - Begin" \
+ "Good luck.\n\n'b' - Begin"
+
+void _intro_screen(){
+	switch(waitInput()){
+		case keyb:
+			setSubtitle("Awaken");
+			setScreen(awaken);
+			break;
+	}
+}
 
 void intro_screen(){
 	cls();
 	puts(wall_of_text);
-	while(1){
-		switch(waitInput()){
-			case keyb:
-				setSubtitle("Awaken");
-				setScreen(awaken);
-				halt();
-				break;
-		}
-	}
+	setScreen(_intro_screen);
 }
