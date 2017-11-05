@@ -2,17 +2,26 @@
 
 void cls(){
 	putch(0);
+	__asm
+	push af
+	push bc
+	ld a, 5
+	ld b, 0
+	out (2), a
+	pop bc
+	pop af
+	__endasm;
 }
 
 void putch(char c){
 	__asm
-	dec sp
 	pop hl
+	dec sp
 	pop af
-	out (0), a
 	push af
-	push hl
 	inc sp
+	push hl
+	out (0), a
 	__endasm;
 	c;
 }
