@@ -150,17 +150,26 @@ void save(save_file_t *file){
 	file->current_screen=current->current_screen;
 	strcpy(file->title,current->title);
 	strcpy(file->subtitle,current->subtitle);
+	memcpy(file->misc_data,current->misc_data,256);
 }
 
 void load(save_file_t *file){
-	getData()->current_save.current_screen=file->current_screen;
+	save_file_t * current=&(getData()->current_save);
+	current->current_screen=file->current_screen;
+	memcpy(current->misc_data,file->misc_data,256);
+	strcpy(current->title,file->title);
+	strcpy(current->subtitle,file->subtitle);
 }
 
 void initFile(save_file_t *file){
 	data_t *data=getData();
+	int i;
 	strcpy(data->current_save.title,"Introduction");
 	strcpy(data->current_save.subtitle,"The Dark Prince");
 	data->current_save.current_screen=intro_screen;
+	for (i=0;i<256;i++) {
+		data->current_save.misc_data[i]=0;
+	}
 	save(file);
 }
 
