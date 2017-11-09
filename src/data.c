@@ -28,13 +28,13 @@ void fileInfo(){
 			puts("Free\n");
 		}
 	}
-	puts("\n'm' - back to Main Menu\n");
 }
 
 void newGame(){
 	char i=0;
 	data_t *data=getData();
 	fileInfo();
+	puts("\n'm' - back to Main Menu\n");
 	while(i==0){
 		switch(i=waitInput()){
 			case key1:
@@ -74,6 +74,7 @@ void loadGame(){
 	char i;
 	data_t *data=getData();
 	fileInfo();
+	puts("\n'm' - back to Main Menu\n");
 	i=0;
 	while(i==0){
 		switch(i=waitInput()){
@@ -97,6 +98,48 @@ void loadGame(){
 	}
 	else{
 		initFile(&data->current_save);
+		save(&data->save_files[i-1]);
+		data->save_flags |= (1<<i);
+	}
+}
+
+void saveGame() {
+	char i;
+	data_t *data=getData();
+	fileInfo();
+	puts("\n'b' - back\n");
+	i=0;
+	while(i==0){
+		switch(i=waitInput()){
+			case key1:
+			case key2:
+			case key3:
+				break;
+			case keyb:
+			case keyB:
+				return;
+			default:
+				i=0;
+				break;
+		}
+	}
+	if (data->save_flags&(1<<i)){
+		puts("Are you sure you want to overwrite file ");
+		putch(i+'0');
+		puts("? ('y'/'n') n\n");
+		while (1) {
+			switch (waitInput()) {
+				case keyy:
+				case keyY:
+					save(&data->save_files[i-1]);
+					return;
+				case keyn:
+				case keyN:
+					return;
+			}
+		}
+	}
+	else{
 		save(&data->save_files[i-1]);
 		data->save_flags |= (1<<i);
 	}

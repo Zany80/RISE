@@ -21,6 +21,7 @@ data_t *getData();
 void initData();
 void newGame();
 void loadGame();
+void saveGame();
 
 void initFile(save_file_t *save_file);
 void save(save_file_t *save_file);
