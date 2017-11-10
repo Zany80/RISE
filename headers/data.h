@@ -1,12 +1,19 @@
 #pragma once
 
 #include <screens.h>
+#include <sprites.h>
+
+typedef struct {
+	char name[32];
+	sprite_t sprite;
+} character_t;
 
 typedef struct {
 	screen_t current_screen;
 	char misc_data[256];
 	char title[32];
 	char subtitle[32];
+	character_t current_character;
 } save_file_t;
 
 typedef struct {

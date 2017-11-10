@@ -33,6 +33,10 @@ void to_your_feet() {
 	puts(options);
 	while (1) {
 		switch (waitInput()) {
+			case keyo:
+				setScreen(cell);
+				save_data[0]++;
+				return;
 			case keyS:
 				setSubtitle("To your feet!");
 				saveGame();

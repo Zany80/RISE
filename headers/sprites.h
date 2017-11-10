@@ -1,3 +1,11 @@
+#pragma once
+
+typedef struct {
+	// Upper nybble is width, lower nybble is height.
+	unsigned char size;
+	char * data;
+} sprite_t;
+
 void uploadSprite(short index,char *sprite);
 void uploadSprite16_16(short index,char *sprite,char transparent_color);
 void uploadSprite32_32(short index,char *sprite,char transparent_color);

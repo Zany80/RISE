@@ -12,9 +12,11 @@
 void awaken(){
 	char i = getData()->current_save.misc_data[0];
 	cls();
-	puts(wall_of_text);
 	if (i >= 1) {
 		puts(layagain);
+	}
+	else {
+		puts(wall_of_text);
 	}
 	if (i >= 2) {
 		puts(nootherreason);

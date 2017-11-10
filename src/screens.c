@@ -4,7 +4,7 @@
 #include <output.h>
 
 screen_t getCurrentScreen() {
-	return getData()->current_save.current_screen;
+	return *(getData()->current_save.current_screen);
 }
 
 void setScreen(screen_t s){
