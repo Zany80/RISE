@@ -151,6 +151,7 @@ void save(save_file_t *file){
 	strcpy(file->title,current->title);
 	strcpy(file->subtitle,current->subtitle);
 	memcpy(file->misc_data,current->misc_data,256);
+	file->brain_rating = current->brain_rating;
 }
 
 void load(save_file_t *file){
@@ -159,17 +160,19 @@ void load(save_file_t *file){
 	memcpy(current->misc_data,file->misc_data,256);
 	strcpy(current->title,file->title);
 	strcpy(current->subtitle,file->subtitle);
+	current->brain_rating = file->brain_rating;
 }
 
 void initFile(save_file_t *file){
-	data_t *data=getData();
+	save_file_t *current_save=&(getData()->current_save);
 	int i;
-	strcpy(data->current_save.title,"Introduction");
-	strcpy(data->current_save.subtitle,"The Dark Prince");
-	data->current_save.current_screen=intro_screen;
+	strcpy(current_save->title,"Introduction");
+	strcpy(current_save->subtitle,"The Dark Prince");
+	current_save->current_screen=intro_screen;
 	for (i=0;i<256;i++) {
-		data->current_save.misc_data[i]=0;
+		current_save->misc_data[i]=0;
 	}
+	current_save->brain_rating=0;
 	save(file);
 }
 

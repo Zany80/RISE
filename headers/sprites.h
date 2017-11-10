@@ -13,3 +13,5 @@ void drawSprite(short index,short x,short y);
 void drawSprite16_16(short startIndex,short x,short y);
 void drawSprite32_32(short startIndex,short x,short y);
 void drawSprite16_8(short startIndex,short x,short y);
+
+////void uploadSprite(sprite_t *s);

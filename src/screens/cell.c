@@ -27,8 +27,13 @@
 "'c' - examine the cookie" \
 "\n'S' - Save game"
 
+#define wasted_time "After wasting time standing up and sitting down like " \
+"some sort of weird chicken human mutant thing, you decide to move on.\n\n"
+
 void cell(){
 	cls();
+	if (getData()->current_save.misc_data[0]!=0)
+		puts(wasted_time);
 	puts(wall_of_text);
 	puts(options);
 	while (1) {
@@ -36,6 +41,13 @@ void cell(){
 			case keyS:
 				setSubtitle("Uh oh! Prison!");
 				saveGame();
+				return;
+			case keyc:
+				setScreen(examine_cookie);
+				return;
+			case keyb:
+				setScreen(self_head_bash);
+				getData()->current_save.brain_rating++;
 				return;
 		}
 	}

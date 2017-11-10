@@ -13,6 +13,7 @@ typedef struct {
 	char misc_data[256];
 	char title[32];
 	char subtitle[32];
+	char brain_rating;
 	character_t current_character;
 } save_file_t;
 

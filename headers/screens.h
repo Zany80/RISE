@@ -10,3 +10,5 @@ void intro_screen();
 void awaken();
 void to_your_feet();
 void cell();
+void examine_cookie();
+void self_head_bash();

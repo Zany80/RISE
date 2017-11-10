@@ -35,7 +35,6 @@ void to_your_feet() {
 		switch (waitInput()) {
 			case keyo:
 				setScreen(cell);
-				save_data[0]++;
 				return;
 			case keyS:
 				setSubtitle("To your feet!");
