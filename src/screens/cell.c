@@ -47,7 +47,11 @@ void cell(){
 				return;
 			case keyb:
 				setScreen(self_head_bash);
-				getData()->current_save.brain_rating++;
+				{
+					float f = getData()->current_save.brain_rating;
+					f--;
+					getData()->current_save.brain_rating;
+				}
 				return;
 		}
 	}

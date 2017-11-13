@@ -3,13 +3,6 @@
 #include <screens.h>
 #include <data.h>
 
-void _sdcc_call_hl() __naked{
-	__asm
-	push hl
-	ret
-	__endasm;
-}
-
 void main() {
 	__asm__("ld sp, 0xB000");
 	setScreen(0);
@@ -24,4 +17,10 @@ void main() {
 	while (1) {
 		getCurrentScreen()();
 	}
+}
+
+char *title() __naked{
+	__asm
+	.asciiz "RISE"
+	__endasm;
 }
