@@ -1,6 +1,7 @@
 #include <output.h>
 #include <input.h>
 #include <data.h>
+#include <screens.h>
 
 #define wall_of_text "Clearly, the construction crew that built this prison " \
 "cut a few corners - they must have used inferior building materials, which " \
@@ -18,5 +19,9 @@ void head_bash_escape(){
 		case keyS:
 			setSubtitle("Would never work in real life");
 			saveGame();
+			break;
+		case keyt:
+			setScreen(prison_navigate);
+			break;
 	}
 }

@@ -37,7 +37,7 @@ void self_head_bash(){
 			saveGame();
 			break;
 		case keyc:
-			getData()->current_save.brain_rating-=2.5;
+			getData()->current_save.current_character.stats.unintelligence += 2.5;
 			if (getData()->current_save.misc_data[1]++ == 4){
 				setScreen(head_bash_escape);
 			}

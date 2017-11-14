@@ -3,18 +3,34 @@
 #include <screens.h>
 #include <sprites.h>
 
+typedef union {
+	struct {
+		float spot;
+		float listen;
+		float sneak;
+		float silence;
+		float unintelligence;
+		float strength;
+		float agility;
+		float endurance;
+		float pain_tolerance;
+	};
+	float as_array[9];
+} stats_t;
+
 typedef struct {
 	char name[32];
 	sprite_t sprite;
+	stats_t stats;
 } character_t;
 
 typedef struct {
 	screen_t current_screen;
-	char misc_data[256];
+	char misc_data[3*1024];
 	char title[32];
 	char subtitle[32];
-	float brain_rating;
 	character_t current_character;
+	character_t adaer_lerauk;
 } save_file_t;
 
 typedef struct {

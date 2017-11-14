@@ -47,7 +47,7 @@ void _options(){
 			setScreen(break_cookie);
 			break;
 		case keye:
-			getData()->current_save.brain_rating--;
+			getData()->current_save.current_character.stats.unintelligence++;
 			setScreen(eat_cookie);
 			break;
 		case keyE:

@@ -150,29 +150,40 @@ void save(save_file_t *file){
 	file->current_screen=current->current_screen;
 	strcpy(file->title,current->title);
 	strcpy(file->subtitle,current->subtitle);
-	memcpy(file->misc_data,current->misc_data,256);
-	file->brain_rating = current->brain_rating;
+	memcpy(file->misc_data,current->misc_data,3*1024);
+	memcpy((char*)&file->current_character,(char*)&current->current_character,sizeof(character_t));
 }
 
 void load(save_file_t *file){
 	save_file_t * current=&(getData()->current_save);
 	current->current_screen=file->current_screen;
-	memcpy(current->misc_data,file->misc_data,256);
+	memcpy(current->misc_data,file->misc_data,3*1024);
 	strcpy(current->title,file->title);
 	strcpy(current->subtitle,file->subtitle);
-	current->brain_rating = file->brain_rating;
+	memcpy((char*)&current->current_character,(char*)&file->current_character,sizeof(character_t));
 }
 
 void initFile(save_file_t *file){
-	save_file_t *current_save=&(getData()->current_save);
+	save_file_t *current=&(getData()->current_save);
 	int i;
-	strcpy(current_save->title,"Introduction");
-	strcpy(current_save->subtitle,"The Dark Prince");
-	current_save->current_screen=intro_screen;
-	for (i=0;i<256;i++) {
-		current_save->misc_data[i]=0;
+	strcpy(current->title,"Introduction");
+	strcpy(current->subtitle,"The Dark Prince");
+	current->current_screen=intro_screen;
+	for (i=0;i<3*1024;i++) {
+		current->misc_data[i]=0;
 	}
-	current_save->brain_rating=0;
+	strcpy(current->adaer_lerauk.name,"Adaer Lerauk");
+	current->adaer_lerauk.sprite.size = 0;
+	current->adaer_lerauk.stats.agility = 7;
+	current->adaer_lerauk.stats.endurance = 4.6;
+	current->adaer_lerauk.stats.listen = -3;
+	current->adaer_lerauk.stats.pain_tolerance = 3.2;
+	current->adaer_lerauk.stats.silence = 3;
+	current->adaer_lerauk.stats.sneak = 4;
+	current->adaer_lerauk.stats.spot = 8;
+	current->adaer_lerauk.stats.strength = 1;
+	current->adaer_lerauk.stats.unintelligence = -2;
+	memcpy((char*)&current->current_character,(char*)&current->adaer_lerauk,sizeof(character_t));
 	save(file);
 }
 

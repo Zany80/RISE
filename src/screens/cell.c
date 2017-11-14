@@ -48,7 +48,7 @@ void cell(){
 				return;
 			case keyb:
 				setScreen(self_head_bash);
-				getData()->current_save.brain_rating -= 2.5;
+				getData()->current_save.current_character.stats.unintelligence += 2.5;
 				return;
 		}
 	}
