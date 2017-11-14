@@ -13,3 +13,4 @@ void cell();
 void examine_cookie();
 void break_cookie();
 void self_head_bash();
+void head_bash_escape();

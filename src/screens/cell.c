@@ -32,8 +32,9 @@
 
 void cell(){
 	cls();
-	if (getData()->current_save.misc_data[0]!=0)
+	if (getData()->current_save.misc_data[0] != 0) {
 		puts(wasted_time);
+	}
 	puts(wall_of_text);
 	puts(options);
 	while (1) {
@@ -47,11 +48,7 @@ void cell(){
 				return;
 			case keyb:
 				setScreen(self_head_bash);
-				{
-					float f = getData()->current_save.brain_rating;
-					f--;
-					getData()->current_save.brain_rating;
-				}
+				getData()->current_save.brain_rating -= 2.5;
 				return;
 		}
 	}

@@ -8,7 +8,7 @@ CFLAGS=--nostdinc --nostdlib -Iheaders -I$(SDK_DIR)/include --no-std-crt0 --std-
 
 STARTUP_SOURCES=$(addprefix startup/,rise.c)
 MAIN_SOURCES=screens.c data.c icon.asm
-SCREEN_SOURCES=$(addprefix screens/,main_menu.c intro_screen.c awaken.c to_your_feet.c cell.c examine_cookie.c self_head_bash.c break_cookie.c)
+SCREEN_SOURCES=$(addprefix screens/,main_menu.c intro_screen.c awaken.c to_your_feet.c cell.c examine_cookie.c self_head_bash.c break_cookie.c head_bash_escape.c)
 SOURCES=$(addprefix src/,$(STARTUP_SOURCES) $(IO_SOURCES) $(MAIN_SOURCES) $(SCREEN_SOURCES) $(FP_SOURCES))
 OBJECTS=$(addprefix bin/,$(addsuffix .o,$(SOURCES)))
 
