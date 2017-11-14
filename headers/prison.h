@@ -10,7 +10,9 @@ typedef struct{
 typedef struct{
 	char posX;
 	char posY;
-	prison_tile_t tiles[256];
+	// 16 rows of 16 tiles
+	prison_tile_t tiles[16][16];
 } prison_map_t;
 
 void init_prison(prison_map_t* map);
+void escaped_yay();

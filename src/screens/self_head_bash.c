@@ -28,7 +28,7 @@
 void self_head_bash(){
 	const char * texts[] = {wall_of_text,second_wall,third_wall,fourth_wall};
 	cls();
-	puts(texts[getData()->current_save.misc_data[1]]);
+	puts( texts[ getData()->current_save.misc_data[1] ] );
 	puts(options);
 	switch (waitInput()) {
 		case keyS:
@@ -38,7 +38,7 @@ void self_head_bash(){
 			break;
 		case keyc:
 			getData()->current_save.current_character.stats.unintelligence += 2.5;
-			if (getData()->current_save.misc_data[1]++ == 4){
+			if (getData()->current_save.misc_data[1]++ == 3){
 				setScreen(head_bash_escape);
 			}
 			break;

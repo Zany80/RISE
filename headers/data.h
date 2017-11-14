@@ -26,7 +26,7 @@ typedef struct {
 
 typedef struct {
 	screen_t current_screen;
-	char misc_data[3*1024];
+	char misc_data[1024];
 	char title[32];
 	char subtitle[32];
 	character_t current_character;

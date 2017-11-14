@@ -165,13 +165,10 @@ void load(save_file_t *file){
 
 void initFile(save_file_t *file){
 	save_file_t *current=&(getData()->current_save);
-	int i;
 	strcpy(current->title,"Introduction");
 	strcpy(current->subtitle,"The Dark Prince");
 	current->current_screen=intro_screen;
-	for (i=0;i<3*1024;i++) {
-		current->misc_data[i]=0;
-	}
+	memfill(current->misc_data,0,1024);
 	strcpy(current->adaer_lerauk.name,"Adaer Lerauk");
 	current->adaer_lerauk.sprite.size = 0;
 	current->adaer_lerauk.stats.agility = 7;
