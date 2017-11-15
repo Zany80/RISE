@@ -1,7 +1,5 @@
 #include <screens.h>
 #include <data.h>
-#include <system.h>
-#include <output.h>
 
 screen_t getCurrentScreen() {
 	return *(getData()->current_save.current_screen);

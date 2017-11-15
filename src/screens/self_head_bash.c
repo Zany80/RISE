@@ -1,7 +1,4 @@
-#include <output.h>
-#include <input.h>
 #include <data.h>
-#include <system.h>
 #include <screens.h>
 
 #define wall_of_text "You bash your head into the wall. "\

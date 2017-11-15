@@ -1,9 +1,5 @@
 #include <screens.h>
-#include <output.h>
-#include <input.h>
 #include <data.h>
-#include <sprites.h>
-#include <system.h>
 
 #define menu_string (const char *) \
 						"RISE\n" \

@@ -1,6 +1,3 @@
-#include <system.h>
-#include <output.h>
-#include <input.h>
 #include <data.h>
 
 #define wall_of_text "The year is 1394. For years, the dark prince Algar has ruled the country of Vlarzel" \

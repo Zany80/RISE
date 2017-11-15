@@ -3,8 +3,12 @@ CC=kcc
 
 SDK_DIR=../zenith80-libc
 
+_P=-Wp,-include -Wp,
+
+include $(SDK_DIR)/flags.make
+
 ASFLAGS=-fexplicit-export -fexplicit-import -Iheaders -I$(SDK_DIR)/include
-CFLAGS=--nostdinc --nostdlib -Iheaders -I$(SDK_DIR)/include --no-std-crt0 --std-sdcc99 -mz80
+CFLAGS=--nostdinc --nostdlib -Iheaders -I$(SDK_DIR)/include --no-std-crt0 --std-sdcc99 -mz80 $(addprefix $(_P),$(STD_INCLUDES))
 
 STARTUP_SOURCES=$(addprefix startup/,rise.c)
 MAIN_SOURCES=screens.c data.c icon.asm
@@ -20,7 +24,7 @@ bin/src/%.o:src/%.c headers
 	mkdir $(dir $@) -p
 	$(CC) -S $< -o $(basename $@).asm $(CFLAGS)
 	$(AS) -c $(basename $@).asm -o $@ $(ASFLAGS)
-	rm $(basename $@).asm
+#	rm $(basename $@).asm
 
 ROM=bin/rise.bin
 IMAGE=bin/rise.png

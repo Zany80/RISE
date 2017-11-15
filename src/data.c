@@ -1,16 +1,9 @@
 #include <data.h>
-#include <output.h>
-#include <input.h>
-#include <system.h>
 #include <screens.h>
-#include <sprites.h>
 
 data_t * getData(){
 	//ensure pmem is activated
-	if (swapBanks(255,3) == 1) {
-		puts("Uh oh");
-		halt();
-	}
+	swapBanks(255,3);
 	return (data_t*)0xF000;
 }
 

@@ -1,5 +1,3 @@
-#include <output.h>
-#include <input.h>
 #include <data.h>
 #include <screens.h>
 

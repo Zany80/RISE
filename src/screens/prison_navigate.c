@@ -1,8 +1,5 @@
-#include <output.h>
 #include <data.h>
 #include <prison.h>
-#include <input.h>
-#include <system.h>
 
 void prison_navigate(){
 	prison_map_t *map = get_prison_map();
@@ -35,11 +32,7 @@ prison_map_t *get_prison_map(){
 	//use bank 4 for prison map data, map to 0x4000-0x8000 in RAM
 	//Note: DO NOT UNDER ANY CIRCUMSTANCES allow code to exceed 16KB!
 	//This is going to be a problem, I just know it. Unfortunately, bank 3 is used for pmem, and 2 is used for the stack.
-	if (swapBanks(5,1) == 1) {
-		 cls();
-		 puts("I/O error!");
-		 halt();
-	}
+	swapBanks(4,1);
 	return (prison_map_t*)0x4000;
 }
 

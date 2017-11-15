@@ -1,6 +1,4 @@
-#include <output.h>
 #include <data.h>
-#include <input.h>
 #include <screens.h>
 
 #define main_string "You rise to your feet, leaning against a nearby wall.\n\n"

@@ -1,9 +1,8 @@
-#include <output.h>
-#include <input.h>
 #include <data.h>
 #include <screens.h>
 
-#define wall_of_text "You wake up with a pounding headache. \"Where - where am I?\" you mutter, slowly becoming more alert."
+const char *wall_of_text = "You wake up with a pounding headache. \"Where - where am I?\" you mutter, slowly becoming more alert.";
+//#define wall_of_text 
 #define layagain " You lay back down, grasping your head in pain."
 #define nootherreason " There's obviously no other reason for you to sit back down, so that must be it."
 #define reallyman " ...really? Really? Was this *really* necessary? Stop fooling around!"
