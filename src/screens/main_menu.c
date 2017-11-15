@@ -2,8 +2,8 @@
 #include <output.h>
 #include <input.h>
 #include <data.h>
-
 #include <sprites.h>
+#include <system.h>
 
 #define menu_string (const char *) \
 						"RISE\n" \
@@ -22,9 +22,12 @@
 extern char * ICON_DATA;
 
 void main_menu(){
-	static char uploaded=0;
 	char invalid=8;
 	char * icon=ICON_DATA;
+	static char uploaded=0;
+	// make sure RAM is in a sane state - banks *will* be swapped later,
+	// but they have to have the proper defaults.
+	//~ swapBanks(1, 1);
 	if(uploaded==0){
 		uploaded=1;
 		uploadSprite32_32(1,icon,1);

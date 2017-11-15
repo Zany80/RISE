@@ -6,6 +6,11 @@
 #include <sprites.h>
 
 data_t * getData(){
+	//ensure pmem is activated
+	if (swapBanks(255,3) == 1) {
+		puts("Uh oh");
+		halt();
+	}
 	return (data_t*)0xF000;
 }
 
@@ -164,11 +169,14 @@ void load(save_file_t *file){
 }
 
 void initFile(save_file_t *file){
+	int i;
 	save_file_t *current=&(getData()->current_save);
 	strcpy(current->title,"Introduction");
 	strcpy(current->subtitle,"The Dark Prince");
 	current->current_screen=intro_screen;
-	memfill(current->misc_data,0,1024);
+	for (i = 0; i != 1024; i++) {
+		current->misc_data[i] = 0;
+	}
 	strcpy(current->adaer_lerauk.name,"Adaer Lerauk");
 	current->adaer_lerauk.sprite.size = 0;
 	current->adaer_lerauk.stats.agility = 7;

@@ -16,3 +16,5 @@ typedef struct{
 
 void init_prison(prison_map_t* map);
 void escaped_yay();
+
+prison_map_t *get_prison_map();
